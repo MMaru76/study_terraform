@@ -4,7 +4,7 @@ provider "aws" {
     region = "ap-northeast-1"
 }
 
-resource "aws_instance" "maruya" {
+resource "aws_instance" "ec2_instance" {
   ami                     = "ami-0ff21806645c5e492"
   instance_type           = var.instance_type
   vpc_security_group_ids  = [aws_security_group.oreodefault.id]
@@ -38,5 +38,5 @@ resource "aws_security_group" "oreodefault" {
 }
 
 output "public_dns_oreo" {
-  value = aws_instance.maruya.public_dns
+  value = aws_instance.ec2_instance.public_dns
 }
