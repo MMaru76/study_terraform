@@ -75,12 +75,17 @@ terraform destroy
 
 ### 実行結果 解説
 
+#### 新規にリソースを作成
 - aws_instance.example will be created
-  - 新規にリソースを作成する
+
+#### 既存のリソースの設定を変更
 - aws_instance.example will be updated in-place
-  - 既存のリソースの設定を変更する
+
+#### 既存のリソースを削除して新しいリソースを作成
 - aws_instance.example must be replaced
-  - 既存のリソースを削除して新しいリソースを作成する
+  - インスタンスの変更
+- aws_iam_policy.example must be replaced
+  - IAMの変更
 
 ### 変更履歴
 - Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
