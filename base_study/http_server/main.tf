@@ -4,10 +4,10 @@ provider "aws" {
     region = "ap-northeast-1"
 }
 
-resource "aws_instance" "ec2_instance" {
+resource "aws_instance" "ec2_instance_resource" {
   ami                     = "ami-0ff21806645c5e492"
   instance_type           = var.instance_type
-  vpc_security_group_ids  = [aws_security_group.oreodefault.id]
+  vpc_security_group_ids  = [aws_security_group.default_resource.id]
   # user_data               = file("../user_data.sh")
 
   user_data = <<EOF
@@ -17,12 +17,12 @@ resource "aws_instance" "ec2_instance" {
   EOF
 
   tags = {
-    Name = "ExampleTag_web"
+    Name = "Tag_web_name"
   }
 }
 
-resource "aws_security_group" "oreodefault" {
-  name = "ec2sg"
+resource "aws_security_group" "default_resource" {
+  name = "ec2_sg_name"
   ingress {
     from_port   = 80
     to_port     = 80
@@ -37,6 +37,6 @@ resource "aws_security_group" "oreodefault" {
   }
 }
 
-output "public_dns_oreo" {
-  value = aws_instance.ec2_instance.public_dns
+output "public_dns_output" {
+  value = aws_instance.ec2_instance_resource.public_dns
 }
