@@ -172,65 +172,65 @@ resource "aws_route_table_association" "tabiya13_1_vpc_association" {
 
 ## PrivateSubnet EIP 冗長化
 //-------------------------------------------------------
-resource "aws_eip" "tabiya21_eip" {
-  vpc        = true
-  depends_on = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
+# resource "aws_eip" "tabiya21_eip" {
+#   vpc        = true
+#   depends_on = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
 
-  tags = {
-    VPC = "tabiya-vpc-tag"
-    Name = "tabiya1-vpc-eip"
-  }
-}
+#   tags = {
+#     VPC = "tabiya-vpc-tag"
+#     Name = "tabiya1-vpc-eip"
+#   }
+# }
 
-resource "aws_eip" "tabiya21_1_eip" {
-  vpc        = true
-  depends_on = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
+# resource "aws_eip" "tabiya21_1_eip" {
+#   vpc        = true
+#   depends_on = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
 
-  tags = {
-    VPC = "tabiya-vpc-tag"
-    Name = "tabiya2-vpc-eip"
-  }
-}
+#   tags = {
+#     VPC = "tabiya-vpc-tag"
+#     Name = "tabiya2-vpc-eip"
+#   }
+# }
 //-------------------------------------------------------
 
 ## PrivateSubnet NAT 冗長化
 //-------------------------------------------------------
-resource "aws_nat_gateway" "tabiya22_nat_gateway" {
-  allocation_id = aws_eip.tabiya21_eip.id
-  subnet_id     = aws_subnet.tabiya01_vpc_public.id
-  depends_on    = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
+# resource "aws_nat_gateway" "tabiya22_nat_gateway" {
+#   allocation_id = aws_eip.tabiya21_eip.id
+#   subnet_id     = aws_subnet.tabiya01_vpc_public.id
+#   depends_on    = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
 
-  tags = {
-    VPC = "tabiya-vpc-tag"
-    Name = "tabiya3-vpc-nat"
-  }
-}
+#   tags = {
+#     VPC = "tabiya-vpc-tag"
+#     Name = "tabiya3-vpc-nat"
+#   }
+# }
 
-resource "aws_nat_gateway" "tabiya22_1_nat_gateway" {
-  allocation_id = aws_eip.tabiya21_1_eip.id
-  subnet_id     = aws_subnet.tabiya01_vpc_public.id
-  depends_on    = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
+# resource "aws_nat_gateway" "tabiya22_1_nat_gateway" {
+#   allocation_id = aws_eip.tabiya21_1_eip.id
+#   subnet_id     = aws_subnet.tabiya01_vpc_public.id
+#   depends_on    = [aws_internet_gateway.tabiya02_vpc_internet_gateway]
 
-  tags = {
-    VPC = "tabiya-vpc-tag"
-    Name = "tabiya4-vpc-nat"
-  }
-}
+#   tags = {
+#     VPC = "tabiya-vpc-tag"
+#     Name = "tabiya4-vpc-nat"
+#   }
+# }
 //-------------------------------------------------------
 
 ## PrivateSubnet route の冗長化
 //-------------------------------------------------------
-resource "aws_route" "tabiya23_vpc_route" {
-  route_table_id         = aws_route_table.tabiya12_route_table.id
-  nat_gateway_id         = aws_nat_gateway.tabiya22_nat_gateway.id
-  destination_cidr_block = "0.0.0.0/0"
-}
+# resource "aws_route" "tabiya23_vpc_route" {
+#   route_table_id         = aws_route_table.tabiya12_route_table.id
+#   nat_gateway_id         = aws_nat_gateway.tabiya22_nat_gateway.id
+#   destination_cidr_block = "0.0.0.0/0"
+# }
 
-resource "aws_route" "tabiya23_1_vpc_route" {
-  route_table_id         = aws_route_table.tabiya12_1_route_table.id
-  nat_gateway_id         = aws_nat_gateway.tabiya22_1_nat_gateway.id
-  destination_cidr_block = "0.0.0.0/0"
-}
+# resource "aws_route" "tabiya23_1_vpc_route" {
+#   route_table_id         = aws_route_table.tabiya12_1_route_table.id
+#   nat_gateway_id         = aws_nat_gateway.tabiya22_1_nat_gateway.id
+#   destination_cidr_block = "0.0.0.0/0"
+# }
 //-------------------------------------------------------
 
 
