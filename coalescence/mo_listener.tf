@@ -34,18 +34,18 @@ resource "aws_lb_listener" "tabiya00-https" {
   }
 }
 
-# resource "aws_lb_listener" "redirect_http_to_https" {
-#   load_balancer_arn = aws_lb.example.arn
-#   port              = "8080"
-#   protocol          = "HTTP"
+resource "aws_lb_listener" "tabiya00-redirect" {
+  load_balancer_arn = aws_lb.tabiya00_lb.arn
+  port              = "8080"
+  protocol          = "HTTP"
 
-#   default_action {
-#     type = "redirect"
+  default_action {
+    type = "redirect"
 
-#     redirect {
-#       port        = "443"
-#       protocol    = "HTTPS"
-#       status_code = "HTTP_301"
-#     }
-#   }
-# }
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
