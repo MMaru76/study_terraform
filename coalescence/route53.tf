@@ -31,7 +31,7 @@ data "aws_route53_zone" "tabiya_host" {
 resource "aws_route53_record" "tabiya_host_record" {
   zone_id = data.aws_route53_zone.tabiya_host.zone_id
   # name    = data.aws_route53_zone.tabiya_host.name
-  name    = "oreo.tabiya.dev"
+  name    = "maru.tabiya.dev"
   type    = "A"
 
   alias {
